@@ -36,9 +36,30 @@ end
 ```
 &nbsp;
 
+## VM Commands
 - create a VM `vagrant up`
 - check status `vagrant status`
 - delete a VM `vagrant destroy`
 - pause a VM `vagrant halt`
 - update a VM `vagrant reload`
 - access a VM `vagrant ssh`
+
+## Linux Commands
+- act as an admin `sudo`
+- update VM `sudo apt-get update`
+- upgrade VM `sudo apt-get upgrade`
+- install VM `sudo apt-get install`
+- remove VM `sudo apt-get remove`
+- systemctl `status/restart/start/stop nginx`
+- installing nginx `sudo apt-get install nginx`
+
+## Starting VM Guide
+- `vagrant up` in the terminal in the directory where vagrant is downloaded
+- edit the vargrantfile and add:
+  ```
+  config.vm.network "private_network", ip: "192.168.10.100"
+  ```
+- once this is done enter the virtual machine by typing `vagrant ssh`
+- type `sudo apt-get update` and then after `sudo apt-get upgrade -y`
+- then finally type `sudo apt-get install nginx` you can then see if it is installed by using `systemctl status nginx`
+- you can then go to the browser and type 192.168.10.100 if there is a connection
