@@ -9,11 +9,10 @@
 - Cost - cost effective
 
 ### Monolith, 2 tier & MicroServices Architectures
-#
-#
-#
-#
-# Virutal Machine Installation
+
+&nbsp;
+
+# Virutal Machine
 ## Install Ruby
 - https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.6.6-1/rubyinstaller-devkit-2.6.6-1-x64.exe
 - Check version by "ruby --version"
@@ -26,13 +25,16 @@
 - In this right click VirtualBox Host-Only Network and choose Properties.
 - Click Install > Service > Manufacturer > Oracle Corporation > Network Service > VirtualBox NDIS6 Bridged Networking Driver
 - Then finally add a vagrantfile where you want to setup the virtual machine and add: 
-
+ 
+&nbsp;
+```
 Vagrant.configure("2") do |config|
 
  config.vm.box = "ubuntu/xenial64"
 
 end
-
+```
+&nbsp;
 
 - create a VM `vagrant up`
 - check status `vagrant status`
