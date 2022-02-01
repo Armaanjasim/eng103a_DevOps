@@ -118,3 +118,11 @@ curl -sl https://deb.nodesource.com/setup_6.x | sudo -E bash -
   - used `rake spec` which gave me 0 failures
 - on virtual machine:
   - went to the `app` directory where i wanted to run the application and followed the instructions on the readme file which was `npm install` then `npm start` and it gave me the correct message "app is ready and listening on port 3000"
+
+### Automating the dependencies By Using provision.sh
+- add `sudo apt-get install nodejs -y`
+- add `sudo apt-get install python-software-properties`
+- add `curl -sl https://deb.nodesource.com/setup_6.x | sudo -E bash -`
+- add `sudo apt-get install nodejs -y`
+- add `sudo npm install pm2 -g`
+#### This will allow the dependecies to install as soon as you run the machine and all I had to do after this was go on the app directory on the virtual machine and type `npm install` then `npm start`.
