@@ -101,13 +101,15 @@ end
 - bundle
 - rake spec
   - this gave me 3 failures which i had to install on the vm. No nodejs, v6 required and npm install on the vm.
-- in the vm to install v6 i used this command with the link
+- firstly in the vm I started by using `sudo apt-get install nodejs -y` however the correct version didnt download.
+- then used `sudo apt-get install python-software-properties` 
+- to install v6 i used this command with the link
 ```
 
 curl -sl https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
 ```
-- i then used `sudo apt-get install nodejs -y` 
+- i then used `sudo apt-get install nodejs -y` to actually install the correct version
 - finally i done `sudo npm install pm2 -g`
 - went back to the local host and used `rake spec` which gave me 0 failures
 - in the vm i then went to the app directory and followed the instructions on the readme file which was `npm install` then `npm start` and it gave me the correct message "app is ready and listening on port 3000"
