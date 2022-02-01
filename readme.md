@@ -2,7 +2,7 @@
 ## Why DevOps
 ### Benefits of DevOps
 
-** Four pillars of DevOps best practice**
+**Four pillars of DevOps best practice**
 - Ease of Us
 - Flexibility
 - Robustness - faster delivery of product
@@ -55,7 +55,8 @@ end
 
 ## Starting VM Guide
 - `vagrant up` in the terminal in the directory where vagrant is downloaded
-- edit the vargrantfile and add:
+- edit the vargrantfile and add:  
+&nbsp;
   ```
   config.vm.network "private_network", ip: "192.168.10.100"
   ```
@@ -63,3 +64,50 @@ end
 - type `sudo apt-get update` and then after `sudo apt-get upgrade -y`
 - then finally type `sudo apt-get install nginx` you can then see if it is installed by using `systemctl status nginx`
 - you can then go to the browser and type 192.168.10.100 if there is a connection
+
+## Linux Basics
+
+### Commands
+
+- who am I `uname -a`
+- where am I `pwd`
+- list directory/files `ls`
+- list hidden folders aswell `ls -a`
+- make a directory `mkdir "name of directory"`
+- navigate to directory `cd "name of directory"`
+- how to create a file `touch "file-name"` or `vim "file-name"`
+- display content of the file `cat "file-name"`
+- how to remove file `rm -rf "file-name"`
+- how to copy a file `cp "file-destination-name" final desination`
+- how to move a file `mv "file-name" final destination`
+- how to check running processes `top`
+
+### Permissions
+- READ Write Executable read only
+- how to check permissions `ll`
+- change permission `chmod permission "file-name"`
+
+### Bash scripting
+- let the system know its a bash script `#!/bin/bash` at the top of the document
+
+### Provision.sh
+- add `#!/bin/bash`
+- add `sudo apt-get update`
+- add `sudo apt-get upgrade`
+- add `sudo apt-get install nginx -y`
+
+## Checking Dependencies & Runnning App  
+- gem install bundler
+- bundle
+- rake spec
+  - this gave me 3 failures which i had to install on the vm. No nodejs, v6 required and npm install on the vm.
+- in the vm to install v6 i used this command with the link
+```
+
+curl -sl https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
+```
+- i then used `sudo apt-get install nodejs -y` 
+- finally i done `sudo npm install pm2 -g`
+- went back to the local host and used `rake spec` which gave me 0 failures
+- in the vm i then went to the app directory and followed the instructions on the readme file which was `npm install` then `npm start` and it gave me the correct message "app is ready and listening on port 3000"
