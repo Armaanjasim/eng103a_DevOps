@@ -128,7 +128,7 @@ curl -sl https://deb.nodesource.com/setup_6.x | sudo -E bash -
 #### This will allow the dependecies to install as soon as you run the machine and all I had to do after this was go on the app directory on the virtual machine and type `npm install` then `npm start`.
 
 ## Linux Variables
-- vreate Linux variables `FIRST_NAME=ARMAAN`
+- create Linux variables `FIRST_NAME=ARMAAN`
 - How to check the variable `echo $FIRST_NAME`
 
 ## Environment Variables
@@ -138,8 +138,8 @@ curl -sl https://deb.nodesource.com/setup_6.x | sudo -E bash -
 - `export LAST_NAME=ALAM` 
 - how to make environment variable persistent `vim ~/.bashrc` then add the variable into this file and save it then type `source ~/.bashrc`
 - how to delete a enviroment variable `unset LAST_NAME`
-- how to kill a process
-- how to use grep & | 
+- how to kill a process `sudo kill "proccess-id"`
+- how to use grep & | (Still dont know or understand)
 
 ## Nginx Reverse Proxy
 - `sudo nano /etc/nginx/sites-available/default`
