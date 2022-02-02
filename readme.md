@@ -126,3 +126,70 @@ curl -sl https://deb.nodesource.com/setup_6.x | sudo -E bash -
 - add `sudo apt-get install nodejs -y`
 - add `sudo npm install pm2 -g`
 #### This will allow the dependecies to install as soon as you run the machine and all I had to do after this was go on the app directory on the virtual machine and type `npm install` then `npm start`.
+
+## Linux Variables
+- vreate Linux variables `FIRST_NAME=ARMAAN`
+- How to check the variable `echo $FIRST_NAME`
+
+## Environment Variables
+- How to check `env var`
+- command `printenv "key"` or `env`
+- create environment variable `export`
+- `export LAST_NAME=ALAM` 
+- how to make environment variable persistent `vim ~/.bashrc` then add the variable into this file and save it then type `source ~/.bashrc`
+- how to delete a enviroment variable `unset LAST_NAME`
+- how to kill a process
+- how to use grep & | 
+
+## Nginx Reverse Proxy
+- `sudo nano /etc/nginx/sites-available/default`
+- in this file find "location/" and add:
+```
+location / {
+                proxy_pass http://localhost:3000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+    }
+```
+- `sudo nginx -t`
+- `sudo systemctl restart nginx`
+- go into app and start the app
+
+## Creating two VMs
+- go back into vagrantfile and change to:
+```
+
+Vagrant.configure("2") do |config|
+    config.vm.define "app" do |app|
+        # creating a virtual machine ubuntu 
+        config.vm.box = "ubuntu/xenial64"
+
+        # creating a private network with ip
+        config.vm.network "private_network", ip: "192.168.10.100"
+
+        # creating a synced_folder
+        config.vm.synced_folder ".", "/home/vagrant/app"
+
+        # Provisioning
+        config.vm.provision "shell", path: "provision.sh"
+        end
+    config.vm.define "db" do |db|
+        config.vm.box = "ubuntu/xenial64"
+        db.vm.network "private_network", ip: "192.168.10.150"
+        end
+end
+```
+#### you can create more vms by adding more config.vm.define's
+
+- `vagrant up`
+- to enter a vm type `vagrant ssh "VM-NAME"
+
+- sudo nano /etc/nginx/sites-available/default
+- sudo nginx -t
+- sudo systemctl restart nginx
+
+### Blocker
+- while trying to run the application again because I edited files to try to get nginx to work I altered files I shouldn't have to fix this I went to virtual-box and removed the virtual machines and done vagrant up again and everything worked out. After a while my reverse proxy wasnt working working so i done a vagrant reload and it started working again.
