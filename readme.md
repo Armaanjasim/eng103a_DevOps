@@ -1,15 +1,14 @@
 # What is DevOps
 ## Why DevOps
 ### Benefits of DevOps
-
 **Four pillars of DevOps best practice**
 - Ease of Us
 - Flexibility
 - Robustness - faster delivery of product
 - Cost - cost effective
 
-### Monolith, 2 tier & MicroServices Architectures
-
+## Monolith, 2 tier & MicroServices Architectures
+![monolith](two_tier_monolith.PNG)
 &nbsp;
 
 # Virutal Machine
@@ -350,7 +349,7 @@ sudo cp app/mongod.conf /etc/
 sudo systemctl restart mongod
 sudo systemctl enable mongod
 ```
-## Launching An Instance In AWS
+# Launching An Instance In AWS
 
 - launch instance
 - search "Ubuntu Server 18.04 LTS"
@@ -379,7 +378,15 @@ sudo apt install nginx -y
 
 ## Syncing Local Host Files To Cloud VM
 - create a file in the cloud vm `eng103a`
-- `scp -i eng103a.pem -r ../Desktop/eng103a/ ubuntu@ec2-3-250-15-190.eu-west-1.compute.amazonaws.com:eng103a`
+- `scp -i eng103a.pem -r ../Desktop/eng103a/ ubuntu@ec2-3-250-15-190.eu-west-1.compute.amazonaws.com:~`
 - install required dependencies look above
 - enable port 3000
     - click on your name under instances again > security > security groups link > edit inbound rules > add rule > type: "Custom TCP" Port range: "3000" source: "anywhere-IPv4" description: "public access" > save rules
+
+## Creating a second instance for the database
+- follow the steps above but name the instance different "ENG103A_ARMAAN_DB" for example. Also only sync the provision file as this instance does not need the app file. IMPORTANT: make sure you only allow access from your ip and not anywhere as this is a database which contains sensetive data. The only ports that should be enabled on this instance is the ssh and the Custom TCP port 27017 to do this:
+    - click on your name under instances > security > security groups link > edit inbound rules > add rule > type: "Custom TCP" Port range: "27017" source: "my ip" description: "my ip only" > save rules
+- after this is done enter the vm and run the provision file which will update, install mongodb etc and change the mongod.config file automatically
+- after that is done we linked the two files using the public address ip that was used. which can be found on the aws website under the database instance
+- After this we want back on the application instance and made a variable "DB_HOST" and instead of using this **echo "export DB_HOST=mongodb://192.168.10.150:27017/posts"** you want to change the ip to the public ip address of the database that AWS provides. Mine looked like this: **echo "export DB_HOST=mongodb://54.216.91.241:27017/posts"**  however my ip is dynamic and it will change everyday.
+- once this is done you can go into your app directory and npm start and then test out if it works in the browser
