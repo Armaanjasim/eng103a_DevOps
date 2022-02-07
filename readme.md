@@ -361,7 +361,7 @@ sudo systemctl enable mongod
 - security group name: "ENG103A_ARMAAN" description: "ENG103A_ARMAAN"
 - change source "my ip" *optional:* add a description "Only my ip"
 - preview and then launch > choose an existing key pair "eng103a | RSA"
-- get the .pem file and put it in ~/.ssh
+- get the .pem file and put it in ~/.ssh (Create .ssh directory if not there with mkdir)
 - click on your name > connect
 - now go to the ssh directory and run `chmod 400 eng103a.pem` to see your key is not publicly viewable
 - Type `ssh -i "eng103a.pem" ubuntu@ec2-3-250-15-190.eu-west-1.compute.amazonaws.com` you are now in your cloud virtual machine.
@@ -387,6 +387,16 @@ sudo apt install nginx -y
 - follow the steps above but name the instance different "ENG103A_ARMAAN_DB" for example. Also only sync the provision file as this instance does not need the app file. IMPORTANT: make sure you only allow access from your ip and not anywhere as this is a database which contains sensetive data. The only ports that should be enabled on this instance is the ssh and the Custom TCP port 27017 to do this:
     - click on your name under instances > security > security groups link > edit inbound rules > add rule > type: "Custom TCP" Port range: "27017" source: "my ip" description: "my ip only" > save rules
 - after this is done enter the vm and run the provision file which will update, install mongodb etc and change the mongod.config file automatically
-- after that is done we linked the two files using the public address ip that was used. which can be found on the aws website under the database instance
+- after that is done we linked the two using the public address ip that was used. which can be found on the aws website under the database instance
 - After this we want back on the application instance and made a variable "DB_HOST" and instead of using this **echo "export DB_HOST=mongodb://192.168.10.150:27017/posts"** you want to change the ip to the public ip address of the database that AWS provides. Mine looked like this: **echo "export DB_HOST=mongodb://54.216.91.241:27017/posts"**  however my ip is dynamic and it will change everyday.
 - once this is done you can go into your app directory and npm start and then test out if it works in the browser
+
+## Amazon Machine Image (AMI)
+- helps us save data if you want to terminate the instance or scared it might get deleted
+- helps us automate deployment on cloud
+
+### Creating Instance Using AMI
+- to create an AMI click on your instance click Actions > Image & Templates > Create Image
+- once this is done you can name your AMI whatever you wish however good naming practices allow you to know what AMI it is etc.
+- after this you can go to AMIs and find the one you just created and after you select it you can launch instance from image
+- with this you can select the instance type, configure instance details, add storage, add tags and configure security group again. With security group you can select an existing security group which allows you to have all of your. After you launch the instance you can ssh into it through gitbash. (Change "root" with ubuntu)
